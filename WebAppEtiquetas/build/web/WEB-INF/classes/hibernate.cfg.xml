@@ -6,8 +6,11 @@
 <!--        <property name="hibernate.connection.url">jdbc:sqlserver://DESKTOP-DOKG39Q\SQLEXPRESS2017;databaseName=dbqrsys</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">desarrollo</property>-->
-        <property name="hibernate.connection.url">jdbc:sqlserver://ASPEL;databaseName=dbqrsys</property>
+<!--        <property name="hibernate.connection.url">jdbc:sqlserver://ASPEL;databaseName=dbqrsys</property>
         <property name="hibernate.connection.username">gastos</property>
+        <property name="hibernate.connection.password">k1CruJ@raDix</property>-->
+        <property name="hibernate.connection.url">jdbc:sqlserver://10.220.221.158\SQLEXPRESS;databaseName=dbqrsys</property>
+        <property name="hibernate.connection.username">gastos_usrdb</property>
         <property name="hibernate.connection.password">k1CruJ@raDix</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>

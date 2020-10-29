@@ -6,12 +6,19 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-    private final String URL = "jdbc:sqlserver://ASPEL;databaseName=SAE70Empre01";
-    private final String USERNAME = "gastos";
-    private final String USERNAME2 = "gastos";
-    private final String PASS = "k1CruJ@raDix";
+    private final String URL = "jdbc:sqlserver://10.130.22.211\\SQL2014;databaseName=SAE70Empre01";
+    private final String USERNAME = "sa";
+    private final String PASS = "aspel$2020";
+    
+    private final String USERNAME2 = "gastos_usrdb";
     private final String PASS2 = "k1CruJ@raDix";
-    private final String URL2 = "jdbc:sqlserver://ASPEL;databaseName=dbqrsys";
+    private final String URL2 = "jdbc:sqlserver://10.220.221.158\\SQLEXPRESS;databaseName=dbqrsys";
+//    private final String URL = "jdbc:sqlserver://ASPEL;databaseName=SAE70Empre01";
+//    private final String USERNAME = "gastos";
+//    private final String USERNAME2 = "gastos";
+//    private final String PASS = "k1CruJ@raDix";
+//    private final String PASS2 = "k1CruJ@raDix";
+//    private final String URL2 = "jdbc:sqlserver://ASPEL;databaseName=dbqrsys";
 //    private final String URL = "jdbc:sqlserver://DESKTOP-DOKG39Q\\SQLEXPRESS2017;databaseName=SAE70Empre01";
 //    private final String USERNAME = "sa";
 //    private final String USERNAME2 = "sa";

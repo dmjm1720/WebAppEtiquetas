@@ -71,13 +71,16 @@ public class LoginBean implements Serializable {
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", this.usuario.getNombre());
             switch (this.usuario.getPerfil().getIdperfil()) {
                 case 1:
-                    ruta = "/WebAppEtiquetas/Views/Home.jsf";
+                    ruta = "/Views/Home.jsf";
+                    //ruta = "/WebAppEtiquetas/Views/Home.jsf";
                     break;
                 case 2:
-                    ruta = "/WebAppEtiquetas/Views/Sae.jsf";
+                    ruta = "/Views/Sae.jsf";
+                    //ruta = "/WebAppEtiquetas/Views/Sae.jsf";
                     break;
                 default:
-                    ruta = "/WebAppEtiquetas/Views/Home.jsf";
+                    ruta = "/Views/Home.jsf";
+                    //ruta = "/WebAppEtiquetas/Views/Home.jsf";
                     break;
             }
 

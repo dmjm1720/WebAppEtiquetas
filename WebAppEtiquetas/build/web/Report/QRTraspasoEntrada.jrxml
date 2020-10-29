@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="qrlabel" pageWidth="198" pageHeight="198" columnWidth="182" leftMargin="8" rightMargin="8" topMargin="8" bottomMargin="8" uuid="e9f5570a-b3b7-44d8-a4e1-ac4b59edd00e">
+	<property name="ireport.zoom" value="3.1384283767210035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[SELECT
+     FACTURA."NOFACTURA" AS FACTURA_NOFACTURA,
+     FACTURA."FECHA" AS FACTURA_FECHA,
+     FACTURA."PROVEEDOR" AS FACTURA_PROVEEDOR,
+     SERIE."SERIE" AS SERIE_SERIE,
+     SERIE."ARTICULO" AS SERIE_ARTICULO,
+     SERIE."DESCRIPCION" AS SERIE_DESCRIPCION,
+     SERIE."ADUANA" AS SERIE_ADUANA,
+     SERIE."PEDIMENTO" AS SERIE_PEDIMENTO,
+     SERIE."FECHAPEDIMENTO" AS SERIE_FECHAPEDIMENTO,
+     SERIE."LOTE" AS SERIE_LOTE
+FROM
+     "dbo"."FACTURA" FACTURA INNER JOIN "dbo"."SERIE" SERIE ON FACTURA."IDFACTURA" = SERIE."IDFACTURA"
+WHERE SERIE."SELECCIONAR" =1 AND FACTURA.TIPO='Traspaso' AND FACTURA.SUBTIPO='Entrada' ORDER BY ORDEN ASC]]>
+	</queryString>
+	<field name="FACTURA_NOFACTURA" class="java.lang.String"/>
+	<field name="FACTURA_FECHA" class="java.sql.Timestamp"/>
+	<field name="FACTURA_PROVEEDOR" class="java.lang.String"/>
+	<field name="SERIE_SERIE" class="java.lang.String"/>
+	<field name="SERIE_ARTICULO" class="java.lang.String"/>
+	<field name="SERIE_DESCRIPCION" class="java.lang.String"/>
+	<field name="SERIE_ADUANA" class="java.lang.String"/>
+	<field name="SERIE_PEDIMENTO" class="java.lang.String"/>
+	<field name="SERIE_FECHAPEDIMENTO" class="java.sql.Date"/>
+	<field name="SERIE_LOTE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="178" splitType="Stretch">
+			<image>
+				<reportElement x="105" y="90" width="72" height="76" uuid="73778315-a2f0-44ba-81a2-fd84bada4c1e"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+
+    new com.google.zxing.qrcode.QRCodeWriter().encode($F{SERIE_ARTICULO} +"|"+$F{SERIE_DESCRIPCION}+"|"+$F{SERIE_SERIE}+" |"+$F{FACTURA_NOFACTURA}+"|"+$F{FACTURA_PROVEEDOR}+"|"+$F{SERIE_PEDIMENTO}+"|"+$F{SERIE_ADUANA}+"|"+$F{SERIE_FECHAPEDIMENTO}, com.google.zxing.BarcodeFormat.QR_CODE, 300, 300))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement style="Detail" x="60" y="21" width="122" height="10" uuid="00ea0dea-8d70-4de0-bcbd-4780e08460c7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERIE_ARTICULO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="54" y="30" width="128" height="10" uuid="f2c8991f-5171-48d1-9c75-c267b8bec882"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERIE_DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="41" y="71" width="141" height="10" uuid="45673974-7f0b-4f28-82d9-365461a75b13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERIE_ADUANA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="50" y="62" width="132" height="10" uuid="e224812e-6123-4ca6-bebb-30107ce36796"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERIE_PEDIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-M-d">
+				<reportElement style="Detail" x="80" y="80" width="102" height="10" uuid="5238c2ef-f9dc-46ec-87c6-9921f5891813"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERIE_FECHAPEDIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="66" y="39" width="116" height="14" uuid="0d74e2ae-edbf-4fe1-a576-5eab4b877c4f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERIE_SERIE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="54" y="11" width="128" height="10" uuid="0234c1a4-b632-4598-9b5f-4b850f3e3553"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_NOFACTURA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="38" y="53" width="144" height="10" uuid="1b2c3c69-aca6-4bf5-b098-3f4fd9a0beef"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_PROVEEDOR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="14" y="11" width="40" height="10" forecolor="#000000" uuid="4a48f495-96bc-4c41-8b9f-cc29ab22e6f0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[No. Factura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="14" y="21" width="46" height="10" forecolor="#000000" uuid="87f08e8d-6caf-42e1-ba96-adc2392d9322"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Clave Artículo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="14" y="30" width="40" height="10" forecolor="#000000" uuid="915c2022-173a-4e83-a8e8-ebeffc6da137"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Descripción:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="14" y="39" width="52" height="14" forecolor="#000000" uuid="beb1ad14-4d31-435a-b889-f21890411f20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Serie:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="14" y="53" width="24" height="10" forecolor="#000000" uuid="d80e306f-7475-4a8b-ac17-a2ad835f3ddd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="14" y="62" width="36" height="10" forecolor="#000000" uuid="6367451b-6032-45f5-8d36-82bb4c60fe1a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pedimento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="14" y="71" width="27" height="10" forecolor="#000000" uuid="25c7012f-35f1-4304-ab60-53acda5516f9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Aduana:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="14" y="80" width="66" height="10" forecolor="#000000" uuid="f902536f-5e41-4935-8fa9-812f2880dc88"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Fecha de pedimento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="9" y="118" width="95" height="10" forecolor="#000000" uuid="c21a1587-8401-4854-9458-57daa179ddc7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Marubeni México S.A. de C.V.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

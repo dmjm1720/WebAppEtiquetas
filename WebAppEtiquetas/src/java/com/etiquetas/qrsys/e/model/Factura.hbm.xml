@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 1, 2018 12:04:30 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.e.model.Factura" table="FACTURA" schema="dbo" catalog="dbqrsys" optimistic-lock="version">
+        <id name="idfactura" type="int">
+            <column name="IDFACTURA" />
+            <generator class="native" />
+        </id>
+        <property name="nofactura" type="string">
+            <column name="NOFACTURA" length="50" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="23" not-null="true" />
+        </property>
+        <property name="idusuario" type="int">
+            <column name="IDUSUARIO" not-null="true" />
+        </property>
+        <property name="proveedor" type="string">
+            <column name="PROVEEDOR" length="250" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="50" />
+        </property>
+        <property name="subtipo" type="string">
+            <column name="SUBTIPO" length="50" />
+        </property>
+        <property name="esquema" type="string">
+            <column name="ESQUEMA" length="250" />
+        </property>
+        <property name="tipocambio" type="java.lang.Double">
+            <column name="TIPOCAMBIO" precision="53" scale="0" />
+        </property>
+        <property name="moneda" type="string">
+            <column name="MONEDA" length="50" />
+        </property>
+        <property name="almacen" type="string">
+            <column name="ALMACEN" length="150" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="OBSERVACION" length="1000" />
+        </property>
+        <property name="idproveedor" type="string">
+            <column name="IDPROVEEDOR" length="10" />
+        </property>
+        <property name="idalmacen" type="java.lang.Integer">
+            <column name="IDALMACEN" />
+        </property>
+        <property name="cveobs" type="java.lang.Integer">
+            <column name="CVEOBS" />
+        </property>
+        <property name="cvedoc" type="string">
+            <column name="CVEDOC" length="20" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="ESTADO" not-null="true" />
+        </property>
+        <set name="series" table="SERIE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDFACTURA" not-null="true" />
+            </key>
+            <one-to-many class="com.etiquetas.qrsys.e.model.Serie" />
+        </set>
+    </class>
+</hibernate-mapping>

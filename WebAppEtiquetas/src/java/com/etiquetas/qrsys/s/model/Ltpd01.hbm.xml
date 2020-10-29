@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.s.model.Ltpd01" table="LTPD01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">
+        <id name="regLtpd" type="int">
+            <column name="REG_LTPD" />
+            <generator class="assigned" />
+        </id>
+        <property name="cveArt" type="string">
+            <column name="CVE_ART" length="16" not-null="true" />
+        </property>
+        <property name="lote" type="string">
+            <column name="LOTE" length="12" />
+        </property>
+        <property name="pedimento" type="string">
+            <column name="PEDIMENTO" length="21" />
+        </property>
+        <property name="cveAlm" type="java.lang.Integer">
+            <column name="CVE_ALM" />
+        </property>
+        <property name="fchcaduc" type="timestamp">
+            <column name="FCHCADUC" length="23" />
+        </property>
+        <property name="fchaduana" type="timestamp">
+            <column name="FCHADUANA" length="23" />
+        </property>
+        <property name="fchultmov" type="timestamp">
+            <column name="FCHULTMOV" length="23" />
+        </property>
+        <property name="nomAduan" type="string">
+            <column name="NOM_ADUAN" length="40" />
+        </property>
+        <property name="cantidad" type="java.lang.Double">
+            <column name="CANTIDAD" precision="53" scale="0" />
+        </property>
+        <property name="cveObs" type="java.lang.Integer">
+            <column name="CVE_OBS" />
+        </property>
+        <property name="ciudad" type="string">
+            <column name="CIUDAD" length="60" />
+        </property>
+        <property name="frontera" type="string">
+            <column name="FRONTERA" length="60" />
+        </property>
+        <property name="fecProdLt" type="timestamp">
+            <column name="FEC_PROD_LT" length="23" />
+        </property>
+        <property name="gln" type="string">
+            <column name="GLN" length="13" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="pedimentosat" type="string">
+            <column name="PEDIMENTOSAT" length="21" />
+        </property>
+    </class>
+</hibernate-mapping>

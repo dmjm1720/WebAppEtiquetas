@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+<!--        <property name="hibernate.connection.url">jdbc:sqlserver://DESKTOP-DOKG39Q\SQLEXPRESS2017;databaseName=SAE70Empre01</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">desarrollo</property>-->
+        <property name="hibernate.connection.url">jdbc:sqlserver://ASPEL;databaseName=SAE70Empre01</property>
+        <property name="hibernate.connection.username">gastos</property>
+        <property name="hibernate.connection.password">k1CruJ@raDix</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <mapping resource="com/etiquetas/qrsys/s/model/Inve01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Tblcontrol01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/ObsDocc01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Moned01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/EnlaceLtpd01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/ParCompc01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Hnumser01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Ltpd01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Compc01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Prov01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Mult01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Foliosc01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Minve01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Numser01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Impu01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/ParCompcClib01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Almacenes01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/CompcClib01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/ParFactf01.hbm.xml"/>
+        <mapping resource="com/etiquetas/qrsys/s/model/Factf01.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/cssLayout.css" />
+        <title>SISTEMA DE ETIQUETAS</title>
+        <h:outputStylesheet name="css/cssLayout.css" />
+    </h:head>
+    <h:body>
+
+        <div id="top">
+            <h1>
+                <h:graphicImage value="/Images/marubeni-logo.png" height="25%"
+                                width="25%"/>
+                <br></br>
+            </h1>
+
+            <h2>SISTEMA DE ETIQUETAS</h2>
+            <ui:insert name="top">Top</ui:insert>
+            <h:form>
+                <p:growl id="messages" />
+                <h:form id="frmTemplate">
+                    <p:growl id="messages" showDetail="false" />
+                    <p:menubar model="#{permisosBean.model}" style= "font-size: 15px"/>
+                </h:form>
+            </h:form>
+        </div>
+
+        <div id="content" class="center_content">
+            <span>
+                <h:form>
+                    <p:outputLabel style="color: #000017; font-weight: bold; font-size: 13px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #000017; font-weight: bold; font-size: 13px" value=" Perfil: #{loginBean.usuario.perfil.descripcion}"/><br></br>    
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/login?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="/Images/poweroff.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>                       
+            </span>
+            <div id="sessionUsuario">
+
+
+
+            </div>
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        <div id="bottom">
+            <strong>&copy; All rights reserved-2018-Marubeni
+                Mexico-Grupo Comercial Tria</strong>
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+    </h:body>
+
+</html>

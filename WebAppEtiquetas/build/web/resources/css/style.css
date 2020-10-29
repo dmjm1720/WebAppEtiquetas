@@ -1,0 +1,91 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    background-image: url(../..//Images/fondo.png);
+    background-size: cover;
+    font-family: sans-serif;
+}
+.loginBox
+{
+    position: absolute;
+    top: 62%;
+    left: 51%;
+    transform: translate(-50%,-50%);
+    width: 300px;
+    height: 370px;
+    padding: 80px 40px;
+    box-sizing: border-box;
+/*    background: rgba(0,0,0,.2);*/
+/*    background-image: url(../..//Images/qr.png);*/
+
+}
+.user
+{
+    width: 120px;
+    height: 120px;
+    border-radius: 0%;
+    overflow: hidden;
+    position: absolute;
+    top: calc(-150px/2);
+    left: calc(50% - 55px);
+}
+h2
+{
+    margin: 0;
+    padding: 0 0 20px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+}
+.loginBox p
+{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #fff;
+}
+.loginBox input
+{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.loginBox input[type="text"],
+.loginBox input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    /*	background: transparent;*/
+    background: firebrick;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+::placeholder
+{
+    color: rgba(255,255,255,.5);
+}
+.loginBox input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+    background: #ff267e;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.loginBox input[type="submit"]:hover
+{
+    background: #efed40;
+    color: #262626;
+}
+.loginBox a
+{
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}

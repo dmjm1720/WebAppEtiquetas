@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Register Invoice</title>
+        <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <ui:composition template="../Template/Template.xhtml">
+            <ui:define name="top">
+
+            </ui:define>
+
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="5400000" />
+                <p:dialog style="font-size: 15px;" header="Sistema de Etiquetas Marubeni México" widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="900" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png" alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 16px; " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+
+                <!--INICIA FORMULARIO PARA REGISTRO DE FACTURA-->
+                <h:form id="formFactura" style="text-align: center"
+                        enctype="multipart/form-data">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:separator style="height: 2px"/>
+                    <br></br>
+                    <h3>MÓDULO-REGISTRO DE FACTURA</h3>
+                    <p:separator style="height: 2px"/>
+                    <p:layout id="capaDatosViaje" style="width: 100%; height: 550px;">
+                        <p:layoutUnit id="datosConcepto" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable id="tblFactura" var="item"
+                                         sortMode="multiple"
+                                         scrollable="true" 
+                                         scrollHeight="435"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="10,20,50,100,200,500" 
+                                         rows="10" 
+                                         paginator="true" 
+                                         reflow="true"
+                                         rowHover="true"
+                                         currentPageReportTemplate="Facturas registradas: #{facturaBean.listarFactura.size()}"
+                                         paginatorAlwaysVisible="true"
+                                         value="#{facturaBean.listarFactura}" style="font-size: 12px"
+                                         emptyMessage="No hay facturas...">
+                                <p:column sortBy="#{item.nofactura}" filterBy="#{item.nofactura}" headerText="Factura">
+                                    <h:outputText value="#{item.nofactura}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.proveedor}" filterBy="#{item.proveedor}" headerText="Proveedor" >
+                                    <h:outputText value="#{item.proveedor}"/>
+                                </p:column>
+                                <p:column headerText="Esquema">
+                                    <h:outputText value="#{item.esquema}"/>
+                                </p:column>
+                                <!--                                <p:column headerText="T. Cambio">
+                                                                    <h:outputText value="{item.tipocambio}"/>
+                                                                </p:column>
+                                                                <p:column headerText="Moneda">
+                                                                    <h:outputText value="{item.moneda}"/>
+                                                                </p:column>-->
+                                <p:column sortBy="#{item.almacen}" filterBy="#{item.almacen}" headerText="Almacén">
+                                    <h:outputText value="#{item.almacen}"/>
+                                </p:column>
+                                <p:column headerText="Observaciones">
+                                    <h:outputText value="#{item.observacion}"/>
+                                </p:column>
+                                <p:column headerText="Ver series" style="width: 30px">
+                                    <p:commandButton id="btnVer" title="Ver series" value="" update="frmVerSeries" 
+                                                     oncomplete="PF('dlgSeries').show()"
+                                                     style="width: 30px; height:30px; background-image: url('../Images/view.png'); 
+                                                     background-size: 28px; background-repeat: no-repeat"
+                                                     actionListener="#{facturaBean.listaSeriesCargadas(item.nofactura)}">
+
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Editar" style="width: 30px">
+                                    <p:commandButton id="btnEditar" value="" title="Editar factura" update="frmEditar" 
+                                                     oncomplete="PF('dlgEditar').show()"
+                                                     style="width: 30px; height:30px; background-image: url('../Images/edit.png'); 
+                                                     background-size: 28px; background-repeat: no-repeat">
+                                        <f:setPropertyActionListener target="#{facturaBean.factura}" value="#{item}"/>
+                                    </p:commandButton>
+                                </p:column>
+                                <!--                                <p:column headerText="Borrar" style="width: 30px">
+                                                                    <p:commandButton id="btnBorrar" value="" title="Borrar factura" update="frmBorrarFactura" 
+                                                                                     oncomplete="PF('dlgBorrarFactura').show()"
+                                                                                     style="width: 30px; height:30px; background-image: url('../Images/delete.png'); 
+                                                                                     background-size: 28px; background-repeat: no-repeat">
+                                                                        <f:setPropertyActionListener target="#{facturaBean.factura}" value="#{item}"/>
+                                                                    </p:commandButton>
+                                                                </p:column>-->
+                            </p:dataTable>
+                        </p:layoutUnit>                              
+                    </p:layout>
+                    <p:separator style="height: 2px"/>
+                </h:form>
+                <!--FINALIZA FORMULARIO PARA REGISTRO DE FACTURA-->
+
+                <!--INICIA FORMULARIO PARA EDITAR-->
+                <h:form id="frmEditar">
+                    <p:dialog id="dialogoEditar" header="Completar registro" widgetVar="dlgEditar"
+                              resizable="false" showEffect="clip" hideEffect="explode" modal="true">
+                        <p:panelGrid columns="2" style="margin: 0 auto">
+
+                            <p:outputLabel value="No Factura"/>
+                            <p:inputText value="#{facturaBean.factura.nofactura}" disabled="true"/>
+
+                            <p:outputLabel value="Selecciona proveedor"/>
+                            <p:selectOneMenu required="true" value="#{facturaBean.factura.proveedor}">
+                                <f:selectItems value="#{facturaBean.listaProveedores}"/>
+                            </p:selectOneMenu> 
+
+                            <p:outputLabel value="Selecciona esquema"/>
+                            <p:selectOneMenu required="true"  value="#{facturaBean.factura.esquema}">
+                                <f:selectItems value="#{facturaBean.listaImpuestos}"/>
+                            </p:selectOneMenu> 
+
+                            <p:outputLabel value="Almacén"/>
+                            <p:selectOneMenu required="true"  value="#{facturaBean.factura.almacen}">
+                                <f:selectItems value="#{facturaBean.listaAlmacenes}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Observaciones"/>
+                            <p:inputTextarea value="#{facturaBean.factura.observacion}" 
+                                             rows="5" cols="55" counter="display" maxlength="255"
+                                             onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                             autoResize="true"/>
+                            <p:outputLabel value="(Observaciones caracteres restantes):"/>
+                            <h:outputText  id="display" />
+
+                        </p:panelGrid>
+
+                        <p:spacer width="680px" height="20px"/>
+                        <p:outputLabel value="Guardar información "/>
+                        <p:commandButton value="" title="Guardar" update="formFactura, formFactura:mensaje" 
+                                         style="width: 50px; height:50px; background-image: url('../Images/save.png');  
+                                         background-size: 48px; background-repeat: no-repeat"
+                                         oncomplete="PF('dlgEditar').hide()"
+                                         actionListener="#{facturaBean.actualizarFactura()}"/>
+                    </p:dialog>
+                </h:form>
+                <!--FINALIZA FORMULARIO PARA EDITAR-->
+
+                <!--INICIA FORMULARIO PARA VER LAS SERIES-->
+                <h:form id="frmVerSeries">
+                    <p:growl id="mensajeBorrar" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog id="dialogoSeries" header="Lista de series" widgetVar="dlgSeries"
+                              resizable="false" showEffect="slide" hideEffect="drop" modal="false">
+                        <p:dataTable id="tblSeries" var="serie" 
+                                     sortMode="multiple"
+                                     scrollable="true" 
+                                     scrollHeight="300"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,20,50,100,200,500" 
+                                     rows="10" 
+                                     paginator="true" 
+                                     currentPageReportTemplate="Series registradas: #{facturaBean.listaSeriesIngresadas.size()}"
+                                     paginatorAlwaysVisible="true"
+                                     value="#{facturaBean.listaSeriesIngresadas}" style="font-size: 12px;"
+                                     emptyMessage="Ningún artículo agregado...">
+                            <p:ajax event="sort" skipChildren="false" />
+                            <p:column headerText="Factura" >
+                                <h:outputText value="#{serie.factura.nofactura}"/>
+                            </p:column>
+                            <p:column headerText="Clave artículo" filterBy="#{serie.articulo}" sortBy="#{serie.articulo}">
+                                <h:outputText value="#{serie.articulo}"/>
+                            </p:column>
+                            <p:column headerText="Descripción" filterBy="#{serie.descripcion}" sortBy="#{serie.descripcion}">
+                                <h:outputText value="#{serie.descripcion}"/>
+                            </p:column>
+                            <p:column  headerText="Serie" filterBy="#{serie.serie}" sortBy="#{serie.serie}">
+                                <h:outputText id="se" value="#{serie.serie}"/>
+                            </p:column>
+                            <!--                            <p:column headerText="Borrar" style="width: 30px">
+                                                            <p:commandButton id="btnBorrar" value="" title="Borrar serie"     
+                                                                             oncomplete="PF('dlgBorrarSerie').show()"
+                                                                             update="frmBorrarFactura"
+                                                                             style="width: 30px; height:30px; background-image: url('../Images/delete.png'); 
+                                                                             background-size: 28px; background-repeat: no-repeat">
+                                                                <f:setPropertyActionListener target="#{facturaBean.serie}" value="#{serie}"/>
+                                                            </p:commandButton>
+                                                        </p:column>-->
+                        </p:dataTable>
+                    </p:dialog>
+                    <p:dialog id="dialogoBorrarSeries" header="Borrar serie" widgetVar="dlgBorrarSerie"
+                              resizable="false" showEffect="slide" hideEffect="drop" modal="false"
+                              style="font-size: 15px">
+                        <p:spacer width="20px"/>
+                        <p:outputLabel value="¿Borrar factura?"/>
+                        <p:spacer width="20px"/>
+                        <p:commandButton style="height: 30px; width: 30px; background-image: url('../Images/delete.png');
+                                         background-size: 28px; background-repeat: no-repeat"
+                                         value="" actionListener="#{facturaBean.eliminarSerie()}" 
+                                         update="tblSeries, mensajeBorrar" oncomplete="PF('dlgBorrarSerie').hide()"
+                                         title="Borrar factura"/>
+                    </p:dialog>  
+                </h:form>
+                <!--FINALIZA FORMULARIO PARA VER LAS SERIES-->
+
+                <!--INICIA FORMULARIO PARA BORRAR FACTURA-->
+                <h:form id="frmBorrarFactura">
+                    <p:dialog id="dialogoBorrarFactura" header="Borrar factura" widgetVar="dlgBorrarFactura"
+                              resizable="false" showEffect="slide" hideEffect="drop" modal="false"
+                              style="font-size: 15px">
+                        <p:spacer width="20px"/>
+                        <p:outputLabel value="¿Borrar factura?"/>
+                        <p:spacer width="20px"/>
+                        <p:commandButton style="height: 30px; width: 30px; background-image: url('../Images/delete.png');
+                                         background-size: 28px; background-repeat: no-repeat"
+                                         value="" actionListener="#{facturaBean.eliminarFactura()}" 
+                                         update="formFactura" oncomplete="PF('dlgBorrarFactura').hide();"
+                                         title="Borrar factura"/>
+                    </p:dialog>
+                </h:form>
+                <!--FINALIZA FORMULARIO PARA BORRAR FACTURA-->
+
+
+            </ui:define>
+            <ui:define name="bottom">
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

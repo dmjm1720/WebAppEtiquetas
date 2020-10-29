@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 1, 2018 12:04:30 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.e.model.Serie" table="SERIE" schema="dbo" catalog="dbqrsys" optimistic-lock="version">
+        <id name="idserie" type="int">
+            <column name="IDSERIE" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="factura" class="com.etiquetas.qrsys.e.model.Factura" fetch="select">
+            <column name="IDFACTURA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="com.etiquetas.qrsys.e.model.Usuario" fetch="select">
+            <column name="IDUSUARIO" />
+        </many-to-one>
+        <property name="serie" type="string">
+            <column name="SERIE" length="30" not-null="true" />
+        </property>
+        <property name="articulo" type="string">
+            <column name="ARTICULO" length="100" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="250" not-null="true" />
+        </property>
+        <property name="aduana" type="string">
+            <column name="ADUANA" length="250" />
+        </property>
+        <property name="pedimento" type="string">
+            <column name="PEDIMENTO" length="50" />
+        </property>
+        <property name="fechapedimento" type="date">
+            <column name="FECHAPEDIMENTO" length="10" />
+        </property>
+        <property name="lote" type="string">
+            <column name="LOTE" length="30" />
+        </property>
+        <property name="impreso" type="java.lang.Integer">
+            <column name="IMPRESO" />
+        </property>
+        <property name="seleccionar" type="java.lang.Boolean">
+            <column name="SELECCIONAR" />
+        </property>
+        <property name="sae" type="java.lang.Boolean">
+            <column name="SAE" />
+        </property>
+        <property name="orden" type="java.lang.Integer">
+            <column name="ORDEN" />
+        </property>
+    </class>
+</hibernate-mapping>

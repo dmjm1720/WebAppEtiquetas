@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Home</title>
+        <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <ui:composition template="../Template/Template.xhtml">
+            <ui:define name="top">
+
+            </ui:define>
+
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="5400000" />
+                <p:dialog style="font-size: 15px;" header="Sistema de Etiquetas Marubeni México" widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="900" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png" alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 16px; " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+
+                <!--INICIA FORMULARIO PARA CARGAR ARCHIVO DE EXCEL-->
+                <h:form id="formExcel" style="text-align: center"
+                        enctype="multipart/form-data">
+                    <h3>-MÓDULO-CARGA DE SERIES .XLSX-</h3>
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"/>
+                    <p:separator style="height: 2px"></p:separator>
+                    <p:fileUpload allowTypes="/(\.|\/)(xls|xlsx)$/" 
+                                  invalidFileMessage="Archivos permitidos: Excel"
+                                  fileLimitMessage="Carga de archivos permitidos: 1"
+                                  label="Seleccionar archivo de Excel" 
+                                  cancelLabel="Cancelar subida"
+                                  uploadLabel="Procesar archivo en sistema" 
+                                  multiple="false" 
+                                  mode="advanced"
+                                  update="formExcel:tblSeries, mensaje"
+                                  fileUploadListener="#{serieBean.upload}">
+                    </p:fileUpload>
+                    <p:separator style="height: 2px"/>
+                    <br></br>
+                    <h3>-SERIES CARGADAS-</h3>
+                    <p:separator style="height: 2px"/>
+                    <p:dataTable id="tblSeries" var="serie"
+                                 sortMode="multiple"
+                                 scrollable="true" 
+                                 scrollHeight="100%"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="10,20,50,100,200,500" 
+                                 rows="10" 
+                                 reflow="true"
+                                 paginator="true" 
+                                 rowHover="true"
+                                 currentPageReportTemplate="Series registradas: #{serieBean.listaSeries.size()}"
+                                 paginatorAlwaysVisible="true"
+                                 value="#{serieBean.listaSeries}" 
+                                 style="font-size: 11px"
+                                 emptyMessage="Ningún artículo agregado...">
+                        <p:column headerText="Factura" >
+                            <h:outputText value="#{serie.factura.nofactura}"/>
+                        </p:column>
+                        <p:column headerText="Clave artículo">
+                            <h:outputText value="#{serie.articulo}"/>
+                        </p:column>
+                        <p:column headerText="Descripción" >
+                            <h:outputText value="#{serie.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="Serie" >
+                            <h:outputText value="#{serie.serie}"/>
+                        </p:column>
+                        <p:column headerText="Pedimento" >
+                            <h:outputText value="#{serie.pedimento}"/>
+                        </p:column>
+                        <p:column headerText="Fecha pedimento" >
+                            <h:outputText value="#{serie.pedimento}"/>
+                        </p:column>
+                        <p:column headerText="Lote" >
+                            <h:outputText value="#{serie.lote}"/>
+                        </p:column>
+                        <p:column headerText="Aduana" >
+                            <h:outputText value="#{serie.aduana}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                    <p:separator style="height: 2px"/>
+                </h:form>
+                <!--TERMINA FORMULARIO PARA CARGAR ARCHIVO DE EXCEL-->
+
+                <!--INICIA FORMUMARIO PARA VER EL ESTATUS DE LAS SERIES INGRESADAS-->
+                <h:form id="frmEstatus">
+                     
+                    <p:dialog id="dialogoEstatus" header="ESTATUS DE SERIES CARGADAS" widgetVar="dlgEstatus"
+                              resizable="false" 
+                              showEffect="slide" 
+                              hideEffect="drop" 
+                              modal="true" 
+                              closable="false">
+                        <p:panelGrid columns="2" style="margin: 0 auto; height: 300px; width: 600px; font-size: 16px; font-weight: bold">
+                            <p:outputLabel value="Campo artículo vacío:"/>
+                            <p:outputLabel value="#{serieBean.camposVaciosArticulo}" style="color: #0066ff"/>
+                            <p:outputLabel value="Campo factura vacío:"/>
+                            <p:outputLabel value="#{serieBean.camposVaciosFactura}" style="color: #0066ff"/>
+                            <p:outputLabel value="Campo serie vacío:"/>
+                            <p:outputLabel value="#{serieBean.camposVaciosSerie}" style="color: #0066ff"/>                          
+                            <p:outputLabel value="Artículos inexistentes:"/>
+                            <p:outputLabel value="#{serieBean.listaArticulosInexistentes}" style="color: #0066ff"/>
+                            <p:outputLabel value="Registros agregados:"/>
+                            <p:outputLabel value="#{serieBean.registrosNuevos}" style="color: #0066ff"/>
+                            <p:outputLabel value="Series duplicadas:"/>
+                            <p:outputLabel value="#{serieBean.listaSeriesDuplicadas}" style="color: #E60013"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="4">
+                            <p:outputLabel value="BORRAR FACTURA" />
+                            <p:commandButton value="" 
+                                             title="BORRAR FACTURA"
+                                             actionListener="#{serieBean.borrarFactura()}"
+                                             update="formExcel:tblSeries, formExcel:mensaje"
+                                             oncomplete="PF('dlgEstatus').hide()"
+                                             style="width: 40px; height:40px; background-image: url('../Images/delete.png'); 
+                                             background-size: 38px; background-repeat: no-repeat"/>
+                            <p:outputLabel value="CERRAR VENTANA Y CONTINUAR PROCESO" />
+                            <p:commandButton value="" 
+                                             title="CERRAR VENTANA Y CONTINUAR PROCESO"
+                                             style="width: 40px; height:40px; background-image: url('../Images/check.png'); 
+                                             background-size: 38px; background-repeat: no-repeat"
+                                             oncomplete="PF('dlgEstatus').hide()"/>
+                        </p:panelGrid>
+                    </p:dialog>
+
+                </h:form>
+                <!--FINALIZA FORMUMARIO PARA VER EL ESTATUS DE LAS SERIES INGRESADAS-->
+            </ui:define>
+
+            <ui:define name="bottom">
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+
+

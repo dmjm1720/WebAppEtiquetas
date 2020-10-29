@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.s.model.Hnumser01" table="HNUMSER01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">
+        <id name="cveArt" type="string">
+            <column name="CVE_ART" length="16" />
+             <generator class="assigned" />
+        </id>
+        <property name="numSer" type="string">
+            <column name="NUM_SER" length="25" />
+        </property>
+        <property name="tipMov" type="java.lang.Integer">
+            <column name="TIP_MOV" />
+        </property>
+        <property name="tipDoc" type="string">
+            <column name="TIP_DOC" length="2" />
+        </property>
+        <property name="cveDoc" type="string">
+            <column name="CVE_DOC" length="20" />
+        </property>
+        <property name="almacen" type="int">
+            <column name="ALMACEN" />
+        </property>
+        <property name="regSerie" type="java.lang.Integer">
+            <column name="REG_SERIE" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="23" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="noPar" type="java.lang.Integer">
+            <column name="NO_PAR" />
+        </property>
+    </class>
+</hibernate-mapping>

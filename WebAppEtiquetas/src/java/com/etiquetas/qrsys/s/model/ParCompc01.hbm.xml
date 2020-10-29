@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.s.model.ParCompc01" table="PAR_COMPC01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">
+ 
+        <id name="cveDoc" type="string">
+            <column name="CVE_DOC" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="numPar" type="int">
+            <column name="NUM_PAR" />
+        </property>
+        <property name="cveArt" type="string">
+            <column name="CVE_ART" length="16" />
+        </property>
+        <property name="cant" type="java.lang.Double">
+            <column name="CANT" precision="53" scale="0" />
+        </property>
+        <property name="pxr" type="java.lang.Double">
+            <column name="PXR" precision="53" scale="0" />
+        </property>
+        <property name="prec" type="java.lang.Double">
+            <column name="PREC" precision="53" scale="0" />
+        </property>
+        <property name="cost" type="java.lang.Double">
+            <column name="COST" precision="53" scale="0" />
+        </property>
+        <property name="impu1" type="java.lang.Double">
+            <column name="IMPU1" precision="53" scale="0" />
+        </property>
+        <property name="impu2" type="java.lang.Double">
+            <column name="IMPU2" precision="53" scale="0" />
+        </property>
+        <property name="impu3" type="java.lang.Double">
+            <column name="IMPU3" precision="53" scale="0" />
+        </property>
+        <property name="impu4" type="java.lang.Double">
+            <column name="IMPU4" precision="53" scale="0" />
+        </property>
+        <property name="imp1apla" type="java.lang.Short">
+            <column name="IMP1APLA" />
+        </property>
+        <property name="imp2apla" type="java.lang.Short">
+            <column name="IMP2APLA" />
+        </property>
+        <property name="imp3apla" type="java.lang.Short">
+            <column name="IMP3APLA" />
+        </property>
+        <property name="imp4apla" type="java.lang.Short">
+            <column name="IMP4APLA" />
+        </property>
+        <property name="totimp1" type="java.lang.Double">
+            <column name="TOTIMP1" precision="53" scale="0" />
+        </property>
+        <property name="totimp2" type="java.lang.Double">
+            <column name="TOTIMP2" precision="53" scale="0" />
+        </property>
+        <property name="totimp3" type="java.lang.Double">
+            <column name="TOTIMP3" precision="53" scale="0" />
+        </property>
+        <property name="totimp4" type="java.lang.Double">
+            <column name="TOTIMP4" precision="53" scale="0" />
+        </property>
+        <property name="descu" type="java.lang.Double">
+            <column name="DESCU" precision="53" scale="0" />
+        </property>
+        <property name="actInv" type="string">
+            <column name="ACT_INV" length="1" />
+        </property>
+        <property name="tipCam" type="java.lang.Double">
+            <column name="TIP_CAM" precision="53" scale="0" />
+        </property>
+        <property name="uniVenta" type="string">
+            <column name="UNI_VENTA" length="10" />
+        </property>
+        <property name="tipoElem" type="string">
+            <column name="TIPO_ELEM" length="1" />
+        </property>
+        <property name="tipoProd" type="string">
+            <column name="TIPO_PROD" length="1" />
+        </property>
+        <property name="cveObs" type="java.lang.Integer">
+            <column name="CVE_OBS" />
+        </property>
+        <property name="regSerie" type="java.lang.Integer">
+            <column name="REG_SERIE" />
+        </property>
+        <property name="ELtpd" type="java.lang.Integer">
+            <column name="E_LTPD" />
+        </property>
+        <property name="factconv" type="java.lang.Double">
+            <column name="FACTCONV" precision="53" scale="0" />
+        </property>
+        <property name="costDev" type="java.lang.Double">
+            <column name="COST_DEV" precision="53" scale="0" />
+        </property>
+        <property name="numAlm" type="java.lang.Integer">
+            <column name="NUM_ALM" />
+        </property>
+        <property name="mindirecto" type="java.lang.Double">
+            <column name="MINDIRECTO" precision="53" scale="0" />
+        </property>
+        <property name="numMov" type="java.lang.Integer">
+            <column name="NUM_MOV" />
+        </property>
+        <property name="totPartida" type="java.lang.Double">
+            <column name="TOT_PARTIDA" precision="53" scale="0" />
+        </property>
+        <property name="manIeps" type="string">
+            <column name="MAN_IEPS" length="1" />
+        </property>
+        <property name="aplManImp" type="java.lang.Integer">
+            <column name="APL_MAN_IMP" />
+        </property>
+        <property name="cuotaIeps" type="java.lang.Double">
+            <column name="CUOTA_IEPS" precision="53" scale="0" />
+        </property>
+        <property name="aplManIeps" type="string">
+            <column name="APL_MAN_IEPS" length="1" />
+        </property>
+        <property name="mtoPorc" type="java.lang.Double">
+            <column name="MTO_PORC" precision="53" scale="0" />
+        </property>
+        <property name="mtoCuota" type="java.lang.Double">
+            <column name="MTO_CUOTA" precision="53" scale="0" />
+        </property>
+        <property name="cveEsq" type="java.lang.Integer">
+            <column name="CVE_ESQ" />
+        </property>
+        <property name="descrArt" type="string">
+            <column name="DESCR_ART" length="40" />
+        </property>
+    </class>
+</hibernate-mapping>

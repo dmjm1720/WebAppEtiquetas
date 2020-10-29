@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 13, 2018 5:23:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.s.model.Factf01" table="FACTF01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">
+        <id name="cveDoc" type="string">
+            <column name="CVE_DOC" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipDoc" type="string">
+            <column name="TIP_DOC" length="1" />
+        </property>
+        <property name="cveClpv" type="string">
+            <column name="CVE_CLPV" length="10" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="datMostr" type="java.lang.Integer">
+            <column name="DAT_MOSTR" />
+        </property>
+        <property name="cveVend" type="string">
+            <column name="CVE_VEND" length="5" />
+        </property>
+        <property name="cvePedi" type="string">
+            <column name="CVE_PEDI" length="20" />
+        </property>
+        <property name="fechaDoc" type="timestamp">
+            <column name="FECHA_DOC" length="23" not-null="true" />
+        </property>
+        <property name="fechaEnt" type="timestamp">
+            <column name="FECHA_ENT" length="23" />
+        </property>
+        <property name="fechaVen" type="timestamp">
+            <column name="FECHA_VEN" length="23" />
+        </property>
+        <property name="fechaCancela" type="timestamp">
+            <column name="FECHA_CANCELA" length="23" />
+        </property>
+        <property name="canTot" type="java.lang.Double">
+            <column name="CAN_TOT" precision="53" scale="0" />
+        </property>
+        <property name="impTot1" type="java.lang.Double">
+            <column name="IMP_TOT1" precision="53" scale="0" />
+        </property>
+        <property name="impTot2" type="java.lang.Double">
+            <column name="IMP_TOT2" precision="53" scale="0" />
+        </property>
+        <property name="impTot3" type="java.lang.Double">
+            <column name="IMP_TOT3" precision="53" scale="0" />
+        </property>
+        <property name="impTot4" type="java.lang.Double">
+            <column name="IMP_TOT4" precision="53" scale="0" />
+        </property>
+        <property name="desTot" type="java.lang.Double">
+            <column name="DES_TOT" precision="53" scale="0" />
+        </property>
+        <property name="desFin" type="java.lang.Double">
+            <column name="DES_FIN" precision="53" scale="0" />
+        </property>
+        <property name="comTot" type="java.lang.Double">
+            <column name="COM_TOT" precision="53" scale="0" />
+        </property>
+        <property name="condicion" type="string">
+            <column name="CONDICION" length="25" />
+        </property>
+        <property name="cveObs" type="java.lang.Integer">
+            <column name="CVE_OBS" />
+        </property>
+        <property name="numAlma" type="java.lang.Integer">
+            <column name="NUM_ALMA" />
+        </property>
+        <property name="actCxc" type="string">
+            <column name="ACT_CXC" length="1" />
+        </property>
+        <property name="actCoi" type="string">
+            <column name="ACT_COI" length="1" />
+        </property>
+        <property name="enlazado" type="string">
+            <column name="ENLAZADO" length="1" />
+        </property>
+        <property name="tipDocE" type="string">
+            <column name="TIP_DOC_E" length="1" />
+        </property>
+        <property name="numMoned" type="java.lang.Integer">
+            <column name="NUM_MONED" />
+        </property>
+        <property name="tipcamb" type="java.lang.Double">
+            <column name="TIPCAMB" precision="53" scale="0" />
+        </property>
+        <property name="numPagos" type="java.lang.Integer">
+            <column name="NUM_PAGOS" />
+        </property>
+        <property name="fechaelab" type="timestamp">
+            <column name="FECHAELAB" length="23" />
+        </property>
+        <property name="primerpago" type="java.lang.Double">
+            <column name="PRIMERPAGO" precision="53" scale="0" />
+        </property>
+        <property name="rfc" type="string">
+            <column name="RFC" length="15" />
+        </property>
+        <property name="ctlpol" type="java.lang.Integer">
+            <column name="CTLPOL" />
+        </property>
+        <property name="escfd" type="string">
+            <column name="ESCFD" length="1" />
+        </property>
+        <property name="autoriza" type="java.lang.Integer">
+            <column name="AUTORIZA" />
+        </property>
+        <property name="serie" type="string">
+            <column name="SERIE" length="10" />
+        </property>
+        <property name="folio" type="java.lang.Integer">
+            <column name="FOLIO" />
+        </property>
+        <property name="autoanio" type="string">
+            <column name="AUTOANIO" length="4" />
+        </property>
+        <property name="datEnvio" type="java.lang.Integer">
+            <column name="DAT_ENVIO" />
+        </property>
+        <property name="contado" type="string">
+            <column name="CONTADO" length="1" />
+        </property>
+        <property name="cveBita" type="java.lang.Integer">
+            <column name="CVE_BITA" />
+        </property>
+        <property name="bloq" type="string">
+            <column name="BLOQ" length="1" />
+        </property>
+        <property name="formaenvio" type="string">
+            <column name="FORMAENVIO" length="1" />
+        </property>
+        <property name="desFinPorc" type="java.lang.Double">
+            <column name="DES_FIN_PORC" precision="53" scale="0" />
+        </property>
+        <property name="desTotPorc" type="java.lang.Double">
+            <column name="DES_TOT_PORC" precision="53" scale="0" />
+        </property>
+        <property name="importe" type="java.lang.Double">
+            <column name="IMPORTE" precision="53" scale="0" />
+        </property>
+        <property name="comTotPorc" type="java.lang.Double">
+            <column name="COM_TOT_PORC" precision="53" scale="0" />
+        </property>
+        <property name="metododepago" type="string">
+            <column name="METODODEPAGO" />
+        </property>
+        <property name="numctapago" type="string">
+            <column name="NUMCTAPAGO" />
+        </property>
+        <property name="tipDocAnt" type="string">
+            <column name="TIP_DOC_ANT" length="1" />
+        </property>
+        <property name="docAnt" type="string">
+            <column name="DOC_ANT" length="20" />
+        </property>
+        <property name="tipDocSig" type="string">
+            <column name="TIP_DOC_SIG" length="1" />
+        </property>
+        <property name="docSig" type="string">
+            <column name="DOC_SIG" length="20" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="UUID" length="50" />
+        </property>
+        <property name="versionSinc" type="timestamp">
+            <column name="VERSION_SINC" length="23" />
+        </property>
+        <property name="formadepagosat" type="string">
+            <column name="FORMADEPAGOSAT" length="5" />
+        </property>
+        <property name="usoCfdi" type="string">
+            <column name="USO_CFDI" length="5" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="120" />
+        </property>
+    </class>
+</hibernate-mapping>

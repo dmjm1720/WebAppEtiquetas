@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Compras</title>
+        <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <ui:composition template="../Template/Template.xhtml">
+            <ui:define name="top">
+            </ui:define>
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="5400000" />
+                <p:dialog style="font-size: 15px;" header="Sistema de Etiquetas Marubeni México" widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="900" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 16px; " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+
+                <h:form id="formFactura" style="text-align: center"
+                        enctype="multipart/form-data">
+                    <p:blockUI block="tool" trigger="btnBuscar">   
+                        <h4 style="font-size: 15px; color: black">Procesando, espere...</h4><br></br>
+                        <p:graphicImage value="../Images/loading.gif" style="height: 120px; width: 120px; "/>
+                    </p:blockUI>
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:separator style="height: 2px"></p:separator>
+                    <p:toolbar id="tool">
+                        <f:facet name="right">
+                            <br></br>
+                            <h3 style="color: #000017">-BUSCAR FACTURAS-TRASPASOS ENTRADAS ALMACEN-</h3>
+                            <h:panelGrid id="pnlTool" columns="16" cellpadding="1">
+                                <p:outputLabel for="almacen" value="ALMACÉN"/>
+                                <p:selectOneMenu id="almacen" required="true"  value="#{traspasosBean.departamento}"
+                                                 requiredMessage="Selecciona almacén">
+                                    <f:selectItem itemValue="" itemLabel="Selecciona almacen"/>
+                                    <f:selectItem itemValue="3" itemLabel="Zacatecas"/>
+                                    <f:selectItem itemValue="14" itemLabel="Hermosillo"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel for="f1" value="FECHA INICIAL"/>
+                                <p:calendar id="f1" value="#{traspasosBean.f1}" required="true" 
+                                            requiredMessage="Coloca fecha inicial"/>
+                                <p:outputLabel for="f2" value="FECHA FINAL"/>
+                                <p:calendar id="f2" value="#{traspasosBean.f2}" required="true"
+                                            requiredMessage="Coloca fecha final"/>
+                                <p:outputLabel value="BUSCAR FACTURAS"/>
+                                <p:commandButton id="btnBuscar" value="" update="formFactura:tblFactura, formFactura:mensaje, tool" 
+                                                 actionListener="#{traspasosBean.buscarTraspasosEntrada()}"
+                                                 style="width: 50px; height:50px; background-image: url('../Images/view.png'); 
+                                                 background-size: 48px; background-repeat: no-repeat"
+                                                 title="BUSCAR FACTURAS-TRASPASOS ENTRADAS ALMACEN"/>
+                            </h:panelGrid>
+                        </f:facet>
+                    </p:toolbar>
+                    <br></br>
+                    <h3>-LISTA DE FACTURAS-TRASPASOS ENTRADAS ALMACEN-</h3>
+
+                    <p:separator style="height: 2px"></p:separator>
+                    <p:layout id="capaDatosViaje" style="width: 100%; height: 550px;">
+                        <p:layoutUnit id="datosConcepto" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable id="tblFactura" var="item"
+                                         sortMode="multiple"
+                                         scrollable="true" 
+                                         scrollHeight="435"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="10,20,50,100,200,500" 
+                                         rows="10" 
+                                         paginator="true" 
+                                         reflow="true"
+                                         rowHover="true"
+                                         resizeMode="fit"
+                                         paginatorAlwaysVisible="true"
+                                         currentPageReportTemplate="Total de facturas: #{traspasosBean.listaFacturasV.size()}"
+                                         value="#{traspasosBean.listaFacturasV}" style="font-size: 11px"
+                                         emptyMessage="No hay facturas...">
+                                <p:ajax event="sort" skipChildren="false" />
+                                <p:column filterBy="#{item.idproveedor}" sortBy="#{item.idproveedor}" headerText="Clave Proveedor" style="width: 150px">
+                                    <h:outputText value="#{item.idproveedor}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Fecha">
+                                    <h:outputText value="#{item.fecha}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{item.proveedor}" sortBy="#{item.proveedor}" headerText="Nombre proveedor">
+                                    <h:outputText value="#{item.proveedor}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{item.nofactura}" sortBy="#{item.nofactura}" headerText="Factura">
+                                    <h:outputText value="#{item.nofactura}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Ver series" style="width: 30px">
+                                    <p:commandButton id="btnVer" value="" title="Ver series" update="frmVerSeries" 
+                                                     oncomplete="PF('dlgSeries').show()"
+                                                     style="width: 30px; height:30px; background-image: url('../Images/view.png'); 
+                                                     background-size: 28px; background-repeat: no-repeat"
+                                                     actionListener="#{traspasosBean.listarSeriesimpresion(item.nofactura)}">
+
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:layoutUnit>                              
+                    </p:layout>
+                    <p:separator style="height: 2px"></p:separator>
+                </h:form>
+
+                <h:form id="frmVerSeries">
+                    <p:blockUI block="tblSeries" trigger="btnPrint">   
+                        <h4 style="font-size: 15px; color: black">Procesando, espere...</h4><br></br>
+                        <p:graphicImage value="../Images/loading.gif" style="height: 120px; width: 120px; "></p:graphicImage>
+                    </p:blockUI>
+                    <p:growl id="mensajes" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog id="dialogoSeries" header="-IMPRESIÓN DE SERIES-ETIQUETAS-" widgetVar="dlgSeries"
+                              resizable="false" 
+                              showEffect="slide" hideEffect="drop"
+                              maximizable="true"
+                              style="margin: auto 0" modal="false">
+                        <p:separator style="height: 2px"></p:separator>
+                        <p:toolbar id="tool">
+                            <f:facet name="right">
+                                <span class="ui-separator">
+                                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                </span>
+                                <p:outputLabel value="SELECCIONA SERIES"/><p:spacer width="10"/>
+                                <p:commandButton id="btnPrint" value="" title="GENERAR ETIQUETAS" 
+                                                 style="width: 30px; height:30px; background-image: url('../Images/library.png'); 
+                                                 background-size: 28px; background-repeat: no-repeat"
+                                                 actionListener="#{traspasosBean.imprimirEtiquetas()}" update="tblSeries, mensajes"/>
+                            </f:facet>
+                        </p:toolbar>
+                        <p:separator style="height: 2px"></p:separator>
+                        <p:dataTable id="tblSeries" var="serie" sortMode="multiple"
+                                     scrollable="true" 
+                                     scrollHeight="300"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,50,100" 
+                                     rows="10" 
+                                     paginator="true" 
+                                     reflow="true"
+                                     rowHover="true"
+                                     resizeMode="fit"
+                                     paginatorAlwaysVisible="true"
+                                     currentPageReportTemplate="Total de series #{traspasosBean.listaSeriesImpresion.size()}"
+                                     value="#{traspasosBean.listaSeriesImpresion}" liveResize="true" style="font-size: 11px"
+                                     emptyMessage="No hay series por agregar información...">
+                            <p:ajax event="sort" skipChildren="false" />
+                            <p:column headerText="No. impresión">
+                                <h:outputText value="#{serie.impreso}"/>
+                            </p:column>
+                            <p:column headerText="Factura" filterBy="#{serie.factura.nofactura}" sortBy="#{serie.factura.nofactura}" >
+                                <h:outputText value="#{serie.factura.nofactura}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Clave artículo" filterBy="#{serie.articulo}" sortBy="#{serie.articulo}">
+                                <h:outputText value="#{serie.articulo}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Descripción" filterBy="#{serie.descripcion}" sortBy="#{serie.descripcion}">
+                                <h:outputText value="#{serie.descripcion}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Serie" filterBy="#{serie.serie}" sortBy="#{serie.serie}">
+                                <h:outputText value="#{serie.serie}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Aduana" filterBy="#{serie.aduana}" sortBy="#{serie.aduana}">
+                                <h:outputText value="#{serie.aduana}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Pedimento" filterBy="#{serie.pedimento}" sortBy="#{serie.pedimento}">
+                                <h:outputText value="#{serie.pedimento}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Fecha pedimento" filterBy="#{serie.fechapedimento}" sortBy="#{serie.fechapedimento}">
+                                <h:outputText value="#{serie.fechapedimento}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="..." style="width: 20px">
+                                <p:selectBooleanCheckbox value="#{serie.seleccionar}">
+                                    <p:ajax event="change" update="tblSeries"/>
+                                </p:selectBooleanCheckbox>                                    
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+                    <p:dialog id="dialogoImpresion"
+                              header="-IMPRESIÓN DE SERIES-ETIQUETAS-" 
+                              widgetVar="dlgImpresion"
+                              resizable="false" 
+                              showEffect="puff" 
+                              hideEffect="explode" 
+                              closable="false"
+                              style="margin: auto 0" modal="false">
+                        <p:panelGrid columns="4">
+                            <p:outputLabel value="VISUALIZAR IMPRESIÓN"/>
+                            <h:commandLink value="" 
+                                           title="VISUALIZAR IMPRESIÓN"
+                                           actionListener="#{traspasosBean.imprimirQR()}" 
+                                           target="iframe_a">
+                                <h:graphicImage url="/Images/view.png" style="height: 40px"/> 
+                            </h:commandLink>
+                            <p:outputLabel value="CERRAR"/>
+                            <p:commandButton value="" 
+                                             title="CERRAR"
+                                             actionListener="#{traspasosBean.regresarEstadoFalse()}"
+                                             oncomplete="PF('dlgImpresion').hide()"
+                                             update="frmVerSeries:tblSeries"
+                                             style="width: 40px; height:40px; background-image: url('../Images/Close.png'); 
+                                             background-size: 38px; background-repeat: no-repeat"/>
+                        </p:panelGrid>
+                        <br></br>
+                        <iframe src="" 
+                                scrolling="auto" height="100%" width="105%" name="iframe_a">
+                        </iframe>
+
+                    </p:dialog>
+                </h:form>
+
+
+            </ui:define>
+            <ui:define name="bottom">
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.s.model.Inve01" table="INVE01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">
+        <id name="cveArt" type="string">
+            <column name="CVE_ART" length="16" />
+            <generator class="assigned" />
+        </id>
+        <property name="descr" type="string">
+            <column name="DESCR" length="40" />
+        </property>
+        <property name="linProd" type="string">
+            <column name="LIN_PROD" length="5" />
+        </property>
+        <property name="conSerie" type="string">
+            <column name="CON_SERIE" length="1" />
+        </property>
+        <property name="uniMed" type="string">
+            <column name="UNI_MED" length="10" />
+        </property>
+        <property name="uniEmp" type="java.lang.Double">
+            <column name="UNI_EMP" precision="53" scale="0" />
+        </property>
+        <property name="ctrlAlm" type="string">
+            <column name="CTRL_ALM" length="10" />
+        </property>
+        <property name="tiemSurt" type="java.lang.Integer">
+            <column name="TIEM_SURT" />
+        </property>
+        <property name="stockMin" type="java.lang.Double">
+            <column name="STOCK_MIN" precision="53" scale="0" />
+        </property>
+        <property name="stockMax" type="java.lang.Double">
+            <column name="STOCK_MAX" precision="53" scale="0" />
+        </property>
+        <property name="tipCosteo" type="string">
+            <column name="TIP_COSTEO" length="1" />
+        </property>
+        <property name="numMon" type="java.lang.Integer">
+            <column name="NUM_MON" />
+        </property>
+        <property name="fchUltcom" type="timestamp">
+            <column name="FCH_ULTCOM" length="23" />
+        </property>
+        <property name="compXRec" type="java.lang.Double">
+            <column name="COMP_X_REC" precision="53" scale="0" />
+        </property>
+        <property name="fchUltvta" type="timestamp">
+            <column name="FCH_ULTVTA" length="23" />
+        </property>
+        <property name="pendSurt" type="java.lang.Double">
+            <column name="PEND_SURT" precision="53" scale="0" />
+        </property>
+        <property name="exist" type="java.lang.Double">
+            <column name="EXIST" precision="53" scale="0" />
+        </property>
+        <property name="costoProm" type="java.lang.Double">
+            <column name="COSTO_PROM" precision="53" scale="0" />
+        </property>
+        <property name="ultCosto" type="java.lang.Double">
+            <column name="ULT_COSTO" precision="53" scale="0" />
+        </property>
+        <property name="cveObs" type="java.lang.Integer">
+            <column name="CVE_OBS" />
+        </property>
+        <property name="tipoEle" type="string">
+            <column name="TIPO_ELE" length="1" />
+        </property>
+        <property name="uniAlt" type="string">
+            <column name="UNI_ALT" length="10" />
+        </property>
+        <property name="facConv" type="java.lang.Double">
+            <column name="FAC_CONV" precision="53" scale="0" />
+        </property>
+        <property name="apart" type="java.lang.Double">
+            <column name="APART" precision="53" scale="0" />
+        </property>
+        <property name="conLote" type="string">
+            <column name="CON_LOTE" length="1" />
+        </property>
+        <property name="conPedimento" type="string">
+            <column name="CON_PEDIMENTO" length="1" />
+        </property>
+        <property name="peso" type="java.lang.Double">
+            <column name="PESO" precision="53" scale="0" />
+        </property>
+        <property name="volumen" type="java.lang.Double">
+            <column name="VOLUMEN" precision="53" scale="0" />
+        </property>
+        <property name="cveEsqimpu" type="java.lang.Integer">
+            <column name="CVE_ESQIMPU" />
+        </property>
+        <property name="cveBita" type="java.lang.Integer">
+            <column name="CVE_BITA" />
+        </property>
+        <property name="vtasAnlC" type="java.lang.Double">
+            <column name="VTAS_ANL_C" precision="53" scale="0" />
+        </property>
+        <property name="vtasAnlM" type="java.lang.Double">
+            <column name="VTAS_ANL_M" precision="53" scale="0" />
+        </property>
+        <property name="compAnlC" type="java.lang.Double">
+            <column name="COMP_ANL_C" precision="53" scale="0" />
+        </property>
+        <property name="compAnlM" type="java.lang.Double">
+            <column name="COMP_ANL_M" precision="53" scale="0" />
+        </property>
+        <property name="prefijo" type="string">
+            <column name="PREFIJO" length="8" />
+        </property>
+        <property name="talla" type="string">
+            <column name="TALLA" length="8" />
+        </property>
+        <property name="color" type="string">
+            <column name="COLOR" length="8" />
+        </property>
+        <property name="cuentCont" type="string">
+            <column name="CUENT_CONT" length="28" />
+        </property>
+        <property name="cveImagen" type="string">
+            <column name="CVE_IMAGEN" length="16" />
+        </property>
+        <property name="blkCstExt" type="string">
+            <column name="BLK_CST_EXT" length="1" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="manIeps" type="string">
+            <column name="MAN_IEPS" length="1" />
+        </property>
+        <property name="aplManImp" type="java.lang.Integer">
+            <column name="APL_MAN_IMP" />
+        </property>
+        <property name="cuotaIeps" type="java.lang.Double">
+            <column name="CUOTA_IEPS" precision="53" scale="0" />
+        </property>
+        <property name="aplManIeps" type="string">
+            <column name="APL_MAN_IEPS" length="1" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="UUID" length="50" />
+        </property>
+        <property name="versionSinc" type="timestamp">
+            <column name="VERSION_SINC" length="23" />
+        </property>
+        <property name="versionSincFechaImg" type="timestamp">
+            <column name="VERSION_SINC_FECHA_IMG" length="23" />
+        </property>
+        <property name="cveProdserv" type="string">
+            <column name="CVE_PRODSERV" length="9" />
+        </property>
+        <property name="cveUnidad" type="string">
+            <column name="CVE_UNIDAD" length="4" />
+        </property>
+    </class>
+</hibernate-mapping>

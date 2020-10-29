@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 1, 2018 12:04:30 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.e.model.Usuario" table="USUARIO" schema="dbo" catalog="dbqrsys" optimistic-lock="version">
+        <id name="idusuario" type="int">
+            <column name="IDUSUARIO" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="perfil" class="com.etiquetas.qrsys.e.model.Perfil" fetch="select">
+            <column name="IDPERFIL" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="50" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="500" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="CORREO" length="50" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="23" not-null="true" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="ESTADO" not-null="true" />
+        </property>
+        <property name="almacen" type="string">
+            <column name="ALMACEN" length="100" not-null="true" />
+        </property>
+        <set name="series" table="SERIE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDUSUARIO" />
+            </key>
+            <one-to-many class="com.etiquetas.qrsys.e.model.Serie" />
+        </set>
+    </class>
+</hibernate-mapping>

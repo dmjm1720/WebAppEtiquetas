@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.s.model.Foliosc01" table="FOLIOSC01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">    
+        <id name="tipDoc" type="string">
+            <column name="TIP_DOC" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="serie" type="string">
+            <column name="SERIE" length="10" />
+        </property>
+        <property name="foliodesde" type="int">
+            <column name="FOLIODESDE" />
+        </property>
+        <property name="foliohasta" type="java.lang.Integer">
+            <column name="FOLIOHASTA" />
+        </property>
+        <property name="ultDoc" type="java.lang.Integer">
+            <column name="ULT_DOC" />
+        </property>
+        <property name="fechUltDoc" type="timestamp">
+            <column name="FECH_ULT_DOC" length="23" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

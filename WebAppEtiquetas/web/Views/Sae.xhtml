@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Register Invoice SAE</title>
+        <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <ui:composition template="../Template/Template.xhtml">
+            <ui:define name="top">
+
+            </ui:define>
+
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="5400000" />
+                <p:dialog style="font-size: 15px;" header="Sistema de Etiquetas Marubeni México" widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="900" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png" alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 16px; " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+                <h:form id="formFactura" style="text-align: center"
+                        enctype="multipart/form-data">
+
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:separator style="height: 2px"></p:separator>
+                    <br></br>
+
+                    <!--INICIA FORMULARIO PARA LISTAR LAS FACTURAS-->
+                    <h3>-MÓDULO-REGISTRO DE SERIES EN SAE-</h3>
+                    <p:separator style="height: 2px"></p:separator>
+                    <p:layout id="capaSeries" style="width: 100%; height: 550px;">
+                        <p:layoutUnit id="datosSeries" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable id="tblFactura" var="item"
+                                         value="#{facturaBean.listarFacturaAlmancen}" 
+                                         sortMode="multiple"
+                                         scrollable="true" 
+                                         scrollHeight="435"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="10,20,50,100,200,500" 
+                                         rows="10" 
+                                         paginator="true" 
+                                         reflow="true"
+                                         rowHover="true"
+                                         resizeMode="fit"
+                                         paginatorAlwaysVisible="true"
+                                         currentPageReportTemplate="Total de facturas: #{facturaBean.listarFacturaAlmancen.size()}"
+                                         style="font-size: 11px"
+                                         emptyMessage="No hay facturas...">
+                                <p:column sortBy="#{item.nofactura}" filterBy="#{item.nofactura}" headerText="Factura">
+                                    <h:outputText value="#{item.nofactura}"></h:outputText>
+                                </p:column>
+                                <p:column sortBy="#{item.proveedor}" filterBy="#{item.proveedor}" headerText="Proveedor" >
+                                    <h:outputText value="#{item.proveedor}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Esquema">
+                                    <h:outputText value="#{item.esquema}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="T. Cambio">
+                                    <h:outputText value="$#{item.tipocambio}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Moneda">
+                                    <h:outputText value="#{item.moneda}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Almacén">
+                                    <h:outputText value="#{item.almacen}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Observaciones">
+                                    <h:outputText value="#{item.observacion}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Ver series" style="width: 30px">
+                                    <p:commandButton id="btnVer" value="" title="Ver series" update="frmVerSeries" 
+                                                     oncomplete="PF('dlgSeries').show()"
+                                                     style="width: 30px; height:30px; background-image: url('../Images/view.png'); 
+                                                     background-size: 28px; background-repeat: no-repeat"
+                                                     actionListener="#{facturaBean.listaSerie(item.nofactura)}"
+                                                     disabled="#{item.proveedor ==null}">
+
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:layoutUnit>                              
+                    </p:layout>
+                    <p:separator style="height: 2px"></p:separator>
+                </h:form>
+                <!--INICIA FORMULARIO PARA LISTAR LAS FACTURAS-->
+
+                <!--INICIA FORMULARIO PARA LISTAR LAS SERIES POR FACTURA-->
+                <h:form id="frmVerSeries">
+                    <p:blockUI block="tblSeries" trigger="btnSave">   
+                        <h4 style="font-size: 15px; color: black">Procesando, espere...</h4><br></br>
+                        <p:graphicImage value="../Images/loading.gif" style="height: 120px; width: 120px; "></p:graphicImage>
+                    </p:blockUI>
+                    <p:growl id="mensajes" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog id="dialogoSeries" 
+                              header="-SERIES-COMPLETAR REGISTRO EN SAE-" 
+                              widgetVar="dlgSeries"
+                              resizable="false" 
+                              showEffect="slide" 
+                              hideEffect="drop" 
+                              maximizable="true"
+                              style="margin: auto 0; text-align: center" modal="false">
+                        <p:separator style="height: 2px"></p:separator>
+                        <p:toolbar id="tool">
+                            <f:facet name="right">
+                                <!--                                <span class="ui-separator">
+                                                                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                                                </span>-->
+                                <h3 style="color: #000017">-INGRESAR INFORMACIÓN COMPLEMENTARIA-</h3>
+                                <h:panelGrid id="pnlTool" columns="14" cellpadding="2">
+                                    <p:outputLabel value="Moneda"/>
+                                    <p:selectOneMenu id="moneda" required="true"  value="#{facturaBean.factura.moneda}">
+                                        <f:selectItem itemLabel="Seleciona" itemValue="" />                            
+                                        <f:selectItems value="#{facturaBean.listaMonedas}" />                            
+                                        <f:ajax execute="moneda" render="tcambio"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Tipo de cambio"/>
+                                    <p:selectOneMenu id="tcambio" required="true"  value="#{facturaBean.factura.tipocambio}">
+                                        <f:selectItems value="#{facturaBean.listaTipoCambio}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="aduana" value="Aduana:" />
+                                    <p:inputText id="aduana" placeholder="Aduana" required="true" requiredMessage="Ingrese aduana" 
+                                                 title="Aduana" value="#{facturaBean.serieEditar.aduana}"/>
+                                    <p:outputLabel for="pedimento" value="Pedimento"/>
+                                    <p:inputMask id="pedimento" required="true"  requiredMessage="Ingrese pedimento"
+                                                 title="Pedimento" mask="99  99  9999  9999999" value="#{facturaBean.serieEditar.pedimento}"/>
+                                    <p:outputLabel for="fecha" value="Fecha"/>
+                                    <p:calendar id="fecha" placeholder="Fecha de pedimento" required="true" requiredMessage="Ingrese fecha de pedimento"
+                                                title="Fecha" value="#{facturaBean.serieEditar.fechapedimento}"/>
+                                    <p:outputLabel for="lote" value="Lote"/>
+                                    <p:inputText id="lote" placeholder="Lote" required="true" requiredMessage="Ingrese lote" 
+                                                 title="Lote" value="#{facturaBean.serieEditar.lote}"/>
+                                    <p:outputLabel value="Guardar en SAE"/>
+                                    <p:commandButton id="btnSave" title="Guardar y registrar en sistema SAE" value="" 
+                                                     style="width: 50px; height:50px; background-image: url('../Images/saveSAE.png'); 
+                                                     background-size: 48px; background-repeat: no-repeat"
+                                                     actionListener="#{facturaBean.guardarPartidas()}" 
+                                                     update="pnlTool, mensajes"/>
+
+                                </h:panelGrid>
+                            </f:facet>
+                        </p:toolbar>
+                        <p:separator style="height: 2px"/>                  
+                        <p:dataTable id="tblSeries" var="serie" sortMode="multiple"
+                                     scrollable="true" scrollHeight="100%"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,20,50,100,200,500" 
+                                     rows="10" 
+                                     paginator="true" 
+                                     reflow="true"
+                                     rowHover="true"
+                                     resizeMode="fit"
+                                     paginatorAlwaysVisible="true"
+                                     currentPageReportTemplate="Total de series: #{facturaBean.listarSeries.size()}"
+                                     value="#{facturaBean.listarSeries}" 
+                                     style="font-size: 11px"
+                                     emptyMessage="No hay series por agregar información...">
+                            <p:ajax event="sort" skipChildren="false" />
+                            <p:column headerText="Factura" filterBy="#{serie.factura.nofactura}" sortBy="#{serie.factura.nofactura}" >
+                                <h:outputText value="#{serie.factura.nofactura}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Clave artículo" filterBy="#{serie.articulo}" sortBy="#{serie.articulo}">
+                                <h:outputText value="#{serie.articulo}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Descripción" filterBy="#{serie.descripcion}" sortBy="#{serie.descripcion}">
+                                <h:outputText value="#{serie.descripcion}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Serie" filterBy="#{serie.serie}" sortBy="#{serie.serie}">
+                                <h:outputText value="#{serie.serie}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Aduana" filterBy="#{serie.aduana}" sortBy="#{serie.aduana}">
+                                <h:outputText value="#{serie.aduana}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Pedimento" filterBy="#{serie.pedimento}"  sortBy="#{serie.pedimento}">
+                                <h:outputText value="#{serie.pedimento}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Fecha pedimento" filterBy="#{serie.fechapedimento}" sortBy="#{serie.fechapedimento}">
+                                <h:outputText value="#{serie.fechapedimento}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="Lote" filterBy="#{serie.lote}" sortBy="#{serie.lote}">
+                                <h:outputText value="#{serie.lote}"></h:outputText>
+                            </p:column>
+                            <p:column headerText="..." style="width: 20px">
+                                <p:selectBooleanCheckbox value="#{serie.seleccionar}" >
+                                    <p:ajax event="change" update="tblSeries"/>
+                                </p:selectBooleanCheckbox>                                    
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+                </h:form>
+                <!--FINALIZA FORMULARIO PARA LISTAR LAS SERIES POR FACTURA-->
+
+            </ui:define>
+            <ui:define name="bottom">
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config
+	xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+	<url-mapping id="Home">
+		<pattern value="/QRSys/" />
+		<view-id value="/Views/Home.jsf" />
+	</url-mapping>
+	<url-mapping id="Register">
+		<pattern value="/QRSysRQr/" />
+		<view-id value="/Views/Register.jsf" />
+	</url-mapping>
+	<url-mapping id="Sae">
+		<pattern value="/QRSysSQr/" />
+		<view-id value="/Views/Sae.jsf" />
+	</url-mapping>
+	<url-mapping id="Compras">
+		<pattern value="/QRSysCQr/" />
+		<view-id value="/Views/Compras.jsf" />
+	</url-mapping>
+	<url-mapping id="Movs-Entrada">
+		<pattern value="/QRSysME/" />
+		<view-id value="/Views/Entrada.jsf" />
+	</url-mapping>
+	<url-mapping id="Movs-Salida">
+		<pattern value="/QRSysMS/" />
+		<view-id value="/Views/Salida.jsf" />
+	</url-mapping>
+	<url-mapping id="Ventas">
+		<pattern value="/QRSysVQr/" />
+		<view-id value="/Views/Ventas.jsf" />
+	</url-mapping>
+	<url-mapping id="Usuarios">
+		<pattern value="/QRSysUrx/" />
+		<view-id value="/Views/Usuarios.jsf" />
+	</url-mapping>
+</pretty-config>

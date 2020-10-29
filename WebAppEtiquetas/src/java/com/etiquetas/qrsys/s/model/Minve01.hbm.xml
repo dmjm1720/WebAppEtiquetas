@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="SAE70Empre01" name="com.etiquetas.qrsys.s.model.Minve01" optimistic-lock="version" schema="dbo" table="MINVE01">
+ 
+        <id name="cveArt" type="string">
+            <column length="16" name="CVE_ART"/>
+            <generator class="assigned" />
+        </id>
+        <property name="almacen" type="int">
+            <column name="ALMACEN"/>
+        </property>
+        <property name="numMov" type="int">
+            <column name="NUM_MOV"/>
+        </property>
+        <property name="cveCpto" type="int">
+            <column name="CVE_CPTO"/>
+        </property>
+        <property name="fechaDocu" type="timestamp">
+            <column length="23" name="FECHA_DOCU"/>
+        </property>
+        <property name="tipoDoc" type="string">
+            <column length="1" name="TIPO_DOC"/>
+        </property>
+        <property name="refer" type="string">
+            <column length="20" name="REFER"/>
+        </property>
+        <property name="claveClpv" type="string">
+            <column length="10" name="CLAVE_CLPV"/>
+        </property>
+        <property name="vend" type="string">
+            <column length="5" name="VEND"/>
+        </property>
+        <property name="cant" type="java.lang.Double">
+            <column name="CANT" precision="53" scale="0"/>
+        </property>
+        <property name="cantCost" type="java.lang.Double">
+            <column name="CANT_COST" precision="53" scale="0"/>
+        </property>
+        <property name="precio" type="java.lang.Double">
+            <column name="PRECIO" precision="53" scale="0"/>
+        </property>
+        <property name="costo" type="java.lang.Double">
+            <column name="COSTO" precision="53" scale="0"/>
+        </property>
+        <property name="afecCoi" type="string">
+            <column length="1" name="AFEC_COI"/>
+        </property>
+        <property name="cveObs" type="java.lang.Integer">
+            <column name="CVE_OBS"/>
+        </property>
+        <property name="regSerie" type="java.lang.Integer">
+            <column name="REG_SERIE"/>
+        </property>
+        <property name="uniVenta" type="string">
+            <column length="10" name="UNI_VENTA"/>
+        </property>
+        <property name="ELtpd" type="java.lang.Integer">
+            <column name="E_LTPD"/>
+        </property>
+        <property name="existG" type="java.lang.Double">
+            <column name="EXIST_G" precision="53" scale="0"/>
+        </property>
+        <property name="existencia" type="java.lang.Double">
+            <column name="EXISTENCIA" precision="53" scale="0"/>
+        </property>
+        <property name="tipoProd" type="string">
+            <column length="1" name="TIPO_PROD"/>
+        </property>
+        <property name="factorCon" type="java.lang.Double">
+            <column name="FACTOR_CON" precision="53" scale="0"/>
+        </property>
+        <property name="fechaelab" type="timestamp">
+            <column length="23" name="FECHAELAB"/>
+        </property>
+        <property name="ctlpol" type="java.lang.Integer">
+            <column name="CTLPOL"/>
+        </property>
+        <property name="cveFolio" type="string">
+            <column length="9" name="CVE_FOLIO"/>
+        </property>
+        <property name="signo" type="java.lang.Integer">
+            <column name="SIGNO"/>
+        </property>
+        <property name="costeado" type="string">
+            <column length="1" name="COSTEADO"/>
+        </property>
+        <property name="costoPromIni" type="java.lang.Double">
+            <column name="COSTO_PROM_INI" precision="53" scale="0"/>
+        </property>
+        <property name="costoPromFin" type="java.lang.Double">
+            <column name="COSTO_PROM_FIN" precision="53" scale="0"/>
+        </property>
+        <property name="costoPromGral" type="java.lang.Double">
+            <column name="COSTO_PROM_GRAL" precision="53" scale="0"/>
+        </property>
+        <property name="desdeInve" type="string">
+            <column length="1" name="DESDE_INVE"/>
+        </property>
+        <property name="movEnlazado" type="java.lang.Integer">
+            <column name="MOV_ENLAZADO"/>
+        </property>
+    </class>
+</hibernate-mapping>

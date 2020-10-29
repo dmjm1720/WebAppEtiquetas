@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.etiquetas.qrsys.s.model.Impu01" table="IMPU01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">
+        <id name="cveEsqimpu" type="int">
+            <column name="CVE_ESQIMPU" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripesq" type="string">
+            <column name="DESCRIPESQ" length="40" />
+        </property>
+        <property name="impuesto1" type="java.lang.Double">
+            <column name="IMPUESTO1" precision="53" scale="0" />
+        </property>
+        <property name="imp1aplica" type="java.lang.Integer">
+            <column name="IMP1APLICA" />
+        </property>
+        <property name="impuesto2" type="java.lang.Double">
+            <column name="IMPUESTO2" precision="53" scale="0" />
+        </property>
+        <property name="imp2aplica" type="java.lang.Integer">
+            <column name="IMP2APLICA" />
+        </property>
+        <property name="impuesto3" type="java.lang.Double">
+            <column name="IMPUESTO3" precision="53" scale="0" />
+        </property>
+        <property name="imp3aplica" type="java.lang.Integer">
+            <column name="IMP3APLICA" />
+        </property>
+        <property name="impuesto4" type="java.lang.Double">
+            <column name="IMPUESTO4" precision="53" scale="0" />
+        </property>
+        <property name="imp4aplica" type="java.lang.Integer">
+            <column name="IMP4APLICA" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="UUID" length="50" />
+        </property>
+        <property name="versionSinc" type="timestamp">
+            <column name="VERSION_SINC" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

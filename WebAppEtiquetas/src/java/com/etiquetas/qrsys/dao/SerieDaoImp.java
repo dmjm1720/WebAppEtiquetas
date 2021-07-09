@@ -384,7 +384,7 @@ public class SerieDaoImp implements SerieDao {
         Session session = HibernateUtil.getSessionfactory().openSession();
         Transaction t = session.beginTransaction();
         try {
-            Query q = session.createSQLQuery("SELECT TOP(1) LOTE FROM SERIE WHERE IDFACTURA='" + noFactura +"' AND PEDIMENTO='" + pedimento +"' AND IDUSUARIO='" + id +"' AND ARTICULO='" + art + "'");
+            Query q = session.createSQLQuery("SELECT TOP(1) LOTE FROM SERIE WHERE IDFACTURA='" + noFactura + "' AND PEDIMENTO='" + pedimento + "' AND IDUSUARIO='" + id + "' AND ARTICULO='" + art + "'");
             lista = q.list();
             t.commit();
             session.close();
@@ -397,11 +397,11 @@ public class SerieDaoImp implements SerieDao {
 
     @Override
     public List<String> listaFecha(int noFactura, String pedimento, int id, String art) {
-         List<String> lista = null;
+        List<String> lista = null;
         Session session = HibernateUtil.getSessionfactory().openSession();
         Transaction t = session.beginTransaction();
         try {
-            Query q = session.createSQLQuery("SELECT TOP(1) FECHAPEDIMENTO FROM SERIE WHERE IDFACTURA='" + noFactura +"' AND PEDIMENTO='" + pedimento +"' AND IDUSUARIO='" + id +"' AND ARTICULO='" + art + "'");
+            Query q = session.createSQLQuery("SELECT TOP(1) FECHAPEDIMENTO FROM SERIE WHERE IDFACTURA='" + noFactura + "' AND PEDIMENTO='" + pedimento + "' AND IDUSUARIO='" + id + "' AND ARTICULO='" + art + "'");
             lista = q.list();
             t.commit();
             session.close();
@@ -414,16 +414,31 @@ public class SerieDaoImp implements SerieDao {
 
     @Override
     public List<String> listaAduana(int noFactura, String pedimento, int id, String art) {
-         List<String> lista = null;
+        List<String> lista = null;
         Session session = HibernateUtil.getSessionfactory().openSession();
         Transaction t = session.beginTransaction();
         try {
-            Query q = session.createSQLQuery("SELECT TOP(1) ADUANA FROM SERIE WHERE IDFACTURA='" + noFactura +"' AND PEDIMENTO='" + pedimento +"' AND IDUSUARIO='" + id +"' AND ARTICULO='" + art + "'");
+            Query q = session.createSQLQuery("SELECT TOP(1) ADUANA FROM SERIE WHERE IDFACTURA='" + noFactura + "' AND PEDIMENTO='" + pedimento + "' AND IDUSUARIO='" + id + "' AND ARTICULO='" + art + "'");
             lista = q.list();
             t.commit();
             session.close();
         } catch (HibernateException e) {
             System.err.println(e.getMessage());
+            t.rollback();
+        }
+        return lista;
+    }
+
+    @Override
+    public List<Serie> listaMantenimientoSeries() {
+        List<Serie> lista = null;
+        Session session = HibernateUtil.getSessionfactory().openSession();
+        Transaction t = session.beginTransaction();
+        try {
+            lista = session.createQuery("FROM Serie").list();
+            t.commit();
+            session.close();
+        } catch (HibernateException e) {
             t.rollback();
         }
         return lista;

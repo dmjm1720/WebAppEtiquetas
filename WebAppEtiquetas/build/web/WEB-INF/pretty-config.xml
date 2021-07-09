@@ -36,4 +36,8 @@
 		<pattern value="/QRSysUrx/" />
 		<view-id value="/Views/Usuarios.jsf" />
 	</url-mapping>
+	<url-mapping id="Etiquetas">
+		<pattern value="/QRSAdm/" />
+		<view-id value="/Views/adm.jsf" />
+	</url-mapping>
 </pretty-config>

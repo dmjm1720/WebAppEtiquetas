@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/src/java/com/etiquetas/qrsys/bean/LoginBean.java</file>
-            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/src/java/hibernateSae.cfg.xml</file>
-            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/src/java/com/etiquetas/qrsys/dao/Conexion.java</file>
-            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/web/WEB-INF/jboss-web.xml</file>
-            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/src/java/com/etiquetas/qrsys/bean/AdministrarEtiquetasBean.java</file>
+            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/src/java/com/etiquetas/qrsys/dao/SerieDao.java</file>
+            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/src/java/com/etiquetas/qrsys/dao/SerieDaoImp.java</file>
+            <file>file:/C:/Users/DM-SISTEMAS/Documents/NuevoGitProjects/DEVS_ME/WebAppEtiquetas/web/Views/adm.xhtml</file>
         </group>
     </open-files>
 </project-private>

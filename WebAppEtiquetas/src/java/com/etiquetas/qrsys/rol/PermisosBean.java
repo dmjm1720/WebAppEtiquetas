@@ -99,7 +99,7 @@ public class PermisosBean implements Serializable {
 
                 break;
             }
-            case 3:
+            case 3: {
                 // Primer submenu
                 DefaultSubMenu primerSubmenu = new DefaultSubMenu("INICIO");
                 DefaultMenuItem item = new DefaultMenuItem("Inicio");
@@ -154,6 +154,18 @@ public class PermisosBean implements Serializable {
                 model.addElement(sextoSubmenu);
                 // Finaliza perfil administrador
                 break;
+            }
+            case 4: {
+                // Quinto submenu
+                DefaultSubMenu etiquetasMenu = new DefaultSubMenu("ADMIN");
+                DefaultMenuItem item = new DefaultMenuItem("Etiquetas");
+                item.setIcon("ui-icon-disk");
+                item.setOutcome("/Views/adm.jsf");
+                etiquetasMenu.addElement(item);
+                model.addElement(etiquetasMenu);
+                // Finaliza perfil administrador
+                break;
+            }
             default:
                 break;
         }

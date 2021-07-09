@@ -4,6 +4,6 @@
   <!--  <security-domain>propsFile</security-domain> -->
   <!--  <server-instance>default-server</server-instance> -->
   <!-- does mapping to server -->
-  <virtual-host>etiquetas.marubeni.com.mx</virtual-host>
+    <virtual-host>etiquetas.marubeni.com.mx</virtual-host>
   <!-- does mapping to host inside server -->
 </jboss-web>

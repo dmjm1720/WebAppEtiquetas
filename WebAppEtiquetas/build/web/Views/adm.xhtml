@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Compras</title>
+        <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="../Template/Template.xhtml">
+            <ui:define name="top">
+
+            </ui:define>
+
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="5400000" />
+                <p:dialog style="font-size: 15px;" header="Sistema de Etiquetas Marubeni México" widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="900" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 16px; " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+
+                <h:form id="frmAdmSeries" style="text-align: center">
+
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"/>
+                    <p:separator style="height: 2px"/>
+                    <br></br>
+                    <h3>-CORRECCIÓN DE ETIQUETAS-</h3>
+                    <p:separator style="height: 2px"/>
+                    <p:layout id="tblAdmSeries" style="width: 100%; height: 550px;">
+                        <p:layoutUnit id="datosSerie" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable id="tblFactura" var="item"
+                                         sortMode="multiple"
+                                         scrollable="true" 
+                                         scrollHeight="100%"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="10,20,50,100,200,500" 
+                                         rows="10" 
+                                         reflow="true"
+                                         paginator="true" 
+                                         rowHover="true"
+                                         currentPageReportTemplate="Series registradas: #{administrarEtiquetasBean.lista.size()}"
+                                         paginatorAlwaysVisible="true"
+                                         value="#{administrarEtiquetasBean.lista}" style="font-size: 11px"
+                                         emptyMessage="No hay facturas...">
+                                <p:column sortBy="#{item.factura.idfactura}" filterBy="#{item.factura.idfactura}" headerText="ID Factura">
+                                    <h:outputText value="#{item.factura.idfactura}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.factura.nofactura}" filterBy="#{item.factura.nofactura}" headerText="Factura">
+                                    <h:outputText value="#{item.factura.nofactura}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.serie}" filterBy="#{item.serie}" headerText="No. Serie">
+                                    <h:outputText value="#{item.serie}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.articulo}" filterBy="#{item.articulo}" headerText="Artículo">
+                                    <h:outputText value="#{item.articulo}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.descripcion}" filterBy="#{item.descripcion}" headerText="Descripción">
+                                    <h:outputText value="#{item.descripcion}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.aduana}" filterBy="#{item.aduana}" headerText="Aduana">
+                                    <h:outputText value="#{item.aduana}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.pedimento}" filterBy="#{item.pedimento}" headerText="Pedimento">
+                                    <h:outputText value="#{item.pedimento}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.fechapedimento}" filterBy="#{item.fechapedimento}" headerText="Fecha pedimento">
+                                    <h:outputText value="#{item.fechapedimento}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.lote}" filterBy="#{item.lote}" headerText="Lote">
+                                    <h:outputText value="#{item.lote}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.impreso}" filterBy="#{item.impreso}" headerText="Contador impresión">
+                                    <h:outputText value="#{item.impreso}"/>
+                                </p:column>
+
+                                <p:column headerText="Editar" style="width: 30px">
+                                    <p:commandButton id="btnVer" value="" title="Ver series" update="frmVerSeries" 
+                                                     oncomplete="PF('dlgSeries').show()"
+                                                     style="width: 30px; height:30px; background-image: url('../Images/view.png'); 
+                                                     background-size: 28px; background-repeat: no-repeat">
+                                        <f:setPropertyActionListener target="#{administrarEtiquetasBean.serie}" value="#{item}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:layoutUnit>                              
+                    </p:layout>
+                    <p:separator style="height: 2px"/>
+                </h:form>
+
+                <h:form id="frmVerSeries">
+                    <p:blockUI block="pnlSeries" trigger="btnActualizar">   
+                        <h4 style="font-size: 15px; color: black">Procesando, espere...</h4><br></br>
+                        <p:graphicImage value="../Images/loading.gif" style="height: 120px; width: 120px; "/>
+                    </p:blockUI>
+                    <p:growl id="mensajes" showSummary="true" showDetail="true"/>
+                    <p:dialog id="dialogoSeries" header="-SERIES-ETIQUETAS-" widgetVar="dlgSeries"
+                              resizable="false" showEffect="slide" hideEffect="drop" height="400px" width="600px"
+                              maximizable="true" style="margin: auto 0" modal="false">
+                        <p:separator style="height: 2px"/>
+                        <h:panelGrid id="pnlSeries" columns="2" title="Actualizar Series">
+                            <h:outputLabel value="ID Factura"/>
+                            <h:outputText value="#{administrarEtiquetasBean.serie.factura.idfactura}"/>
+
+                            <p:outputLabel value="No. Factura"/>
+                            <h:outputText value="#{administrarEtiquetasBean.serie.factura.nofactura}"/>
+
+                            <p:outputLabel value="No. Serie"/>
+                            <p:inputText value="#{administrarEtiquetasBean.serie.serie}"/>
+
+                            <p:outputLabel value="Artículo"/>
+                            <p:inputText value="#{administrarEtiquetasBean.serie.articulo}"/>
+
+                            <p:outputLabel value="Descripción"/>
+                            <p:inputText value="#{administrarEtiquetasBean.serie.descripcion}" style="width: 300px"/>
+
+                            <p:outputLabel value="Aduana"/>
+                            <p:inputText value="#{administrarEtiquetasBean.serie.aduana}"/>
+
+                            <p:outputLabel value="No. Pedimento"/>
+                            <p:inputMask id="pedimento" required="true"  requiredMessage="Ingrese pedimento"
+                                         title="Pedimento" mask="99  99  9999  9999999" value="#{administrarEtiquetasBean.serie.pedimento}"/>
+
+                            <p:outputLabel value="Fecha de Pedimento"/>
+                            <p:calendar id="fecha" placeholder="Fecha de pedimento" required="true" requiredMessage="Ingrese fecha de pedimento"
+                                        title="Fecha de Pedimento" value="#{administrarEtiquetasBean.serie.fechapedimento}"/>
+
+                            <h:outputLabel value="Lote"/>
+                            <p:inputText value="#{administrarEtiquetasBean.serie.lote}"/>
+
+                            <p:outputLabel value="No. Impresión"/>
+                            <p:inputText value="#{administrarEtiquetasBean.serie.impreso}"/>
+
+                        </h:panelGrid>
+                        <p:commandButton value="Actualizar" id="btnActualizar" 
+                                         update="frmAdmSeries" oncomplete="PF('dlgSeries').hide()"
+                                         actionListener="#{administrarEtiquetasBean.actualizarSeries()}"/>
+                        <p:separator style="height: 2px"/>
+                    </p:dialog >
+
+                </h:form>
+            </ui:define>
+            <ui:define name="bottom">
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

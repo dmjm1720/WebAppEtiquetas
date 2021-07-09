@@ -54,4 +54,7 @@ public interface SerieDao {
     public List<String> listaAduana(int noFactura, String pedimento, int id, String art);
     /////////
 
+    //Mantenimiento Series
+    public List<Serie> listaMantenimientoSeries();
+
 }

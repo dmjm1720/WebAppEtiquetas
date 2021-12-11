@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class catalog="SAE70Empre01" name="com.etiquetas.qrsys.s.model.Minve01" optimistic-lock="version" schema="dbo" table="MINVE01">
+    <class catalog="SAE80Empre01" name="com.etiquetas.qrsys.s.model.Minve01" optimistic-lock="version" schema="dbo" table="MINVE01">
  
         <id name="cveArt" type="string">
             <column length="16" name="CVE_ART"/>

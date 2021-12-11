@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Jul 27, 2018 2:46:40 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.etiquetas.qrsys.s.model.CompcClib01" table="COMPC_CLIB01" schema="dbo" catalog="SAE70Empre01" optimistic-lock="version">
+    <class name="com.etiquetas.qrsys.s.model.CompcClib01" table="COMPC_CLIB01" schema="dbo" catalog="SAE80Empre01" optimistic-lock="version">
         <id name="claveDoc" type="string">
             <column name="CLAVE_DOC" length="20" />
             <generator class="assigned" />

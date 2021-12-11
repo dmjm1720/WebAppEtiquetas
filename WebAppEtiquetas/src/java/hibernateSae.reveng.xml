@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 
 <hibernate-reverse-engineering>
-    <schema-selection match-catalog="SAE70Empre01" match-schema="dbo"/>
+    <schema-selection match-catalog="SAE80Empre01" match-schema="dbo"/>
     <table-filter match-name="INVE01"/>
     <table-filter match-name="PROV01"/>
     <table-filter match-name="IMPU01"/>

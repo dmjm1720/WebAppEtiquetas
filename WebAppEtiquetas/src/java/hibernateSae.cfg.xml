@@ -8,7 +8,10 @@
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">dev22</property>-->
         
-        <property name="hibernate.connection.url">jdbc:sqlserver://10.130.22.211\SQL2014;databaseName=SAE80Empre01</property>
+<!--        <property name="hibernate.connection.url">jdbc:sqlserver://10.130.22.211\SQL2014;databaseName=SAE80Empre01</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">aspel$2020</property>-->
+        <property name="hibernate.connection.url">jdbc:sqlserver://MEX202201;databaseName=SAE90Empre01</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">aspel$2020</property>
         

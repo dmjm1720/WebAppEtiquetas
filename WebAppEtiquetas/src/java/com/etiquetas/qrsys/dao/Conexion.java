@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-    private final String URL = "jdbc:sqlserver://10.130.22.211\\SQL2014;databaseName=SAE80Empre01";
+    //private final String URL = "jdbc:sqlserver://10.130.22.211\\SQL2014;databaseName=SAE80Empre01";
+    private final String URL = "jdbc:sqlserver://MEX202201;databaseName=SAE90Empre01";
     private final String USERNAME = "sa";
     private final String PASS = "aspel$2020";
     private final String USERNAME2 = "gastos_usrdb";

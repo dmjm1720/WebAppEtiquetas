@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 13, 2018 5:23:12 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.etiquetas.qrsys.s.model.ParFactf01" table="PAR_FACTF01" schema="dbo" catalog="SAE80Empre01" optimistic-lock="version">
+    <class name="com.etiquetas.qrsys.s.model.ParFactf01" table="PAR_FACTF01" schema="dbo" catalog="SAE90Empre01" optimistic-lock="version">
         <id name="cveDoc" type="string">
             <column name="CVE_DOC" length="20" />
             <generator class="assigned"/>
